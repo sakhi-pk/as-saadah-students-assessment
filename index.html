@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>As-Sa'adah Student Achievement &amp; Transformation Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-dark:#123528;
+    --green:#1f4d3a;
+    --green-mid:#2f6b4f;
+    --green-soft:#3f8163;
+    --green-light:#eef4f0;
+    --green-line:#dbe8e0;
+    --gold:#c39a4b;
+    --gold-deep:#a97f36;
+    --gold-soft:#e9dcb8;
+    --gold-pale:#f6efdb;
+    --text:#1c2621;
+    --muted:#6b7a70;
+    --muted-soft:#8b9891;
+    --bg:#f6f7f5;
+    --white:#ffffff;
+    --line:#e2e9e4;
+    --radius-lg:18px;
+    --radius-md:12px;
+    --radius-sm:9px;
+    --shadow-card:0 1px 2px rgba(18,53,40,0.04), 0 12px 32px -12px rgba(18,53,40,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:'Inter', 'Segoe UI', Tahoma, sans-serif;
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(195,154,75,0.06), transparent 45%),
+      radial-gradient(circle at 0% 100%, rgba(31,77,58,0.05), transparent 40%);
+    background-attachment:fixed;
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Header ---------- */
+  .header{
+    position:relative;
+    background:
+      radial-gradient(140% 160% at 12% -10%, #1f4d3a 0%, #163d2d 45%, #0d251b 100%);
+    padding:52px 20px 42px;
+    text-align:center;
+    color:var(--white);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .header .pattern{
+    position:absolute;
+    inset:0;
+    opacity:0.16;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23c39a4b' stroke-width='0.7'%3E%3Cpath d='M42 4 L60 20 L60 42 L78 60 L60 60 L42 78 L42 60 L20 60 L4 60 L20 42 L20 20 Z'/%3E%3Ccircle cx='42' cy='42' r='2'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:84px 84px;
+    z-index:0;
+  }
+  .header::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold) 15%, var(--gold-soft) 50%, var(--gold) 85%, transparent);
+    z-index:1;
+  }
+  .header .header-inner{ position:relative; z-index:2; }
+  .header img{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:var(--white);
+    padding:6px;
+    margin-bottom:16px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,162,75,0.4);
+  }
+  .header .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    font-size:0.66rem;
+    letter-spacing:3.5px;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin:0 0 14px;
+    font-weight:600;
+  }
+  .header .eyebrow::before,
+  .header .eyebrow::after{
+    content:"";
+    width:18px; height:1px;
+    background:rgba(233,220,184,0.5);
+  }
+  .header h1{
+    margin:0;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:2.15rem;
+    line-height:1.18;
+    max-width:520px;
+    margin-inline:auto;
+    letter-spacing:0.2px;
+  }
+  .header p{
+    margin:14px auto 0;
+    font-size:0.9rem;
+    color:#cfe0d6;
+    max-width:400px;
+    font-style:italic;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.08rem;
+  }
+
+  /* ---------- Layout ---------- */
+  .container{
+    max-width:680px;
+    margin:0 auto;
+    padding:0 16px 80px;
+  }
+  .progress-wrap{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:0 0 var(--radius-md) var(--radius-md);
+    padding:18px 22px 20px;
+    margin-bottom:24px;
+    box-shadow:var(--shadow-card);
+    position:relative;
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:10px;
+  }
+  .progress-stepname{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--green-dark);
+    letter-spacing:0.2px;
+  }
+  .progress-count{
+    font-size:0.68rem;
+    letter-spacing:0.8px;
+    text-transform:uppercase;
+    color:var(--muted-soft);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .progress-bar{
+    height:5px;
+    background:var(--green-light);
+    border-radius:6px;
+    overflow:hidden;
+    position:relative;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--green-mid), var(--gold));
+    width:0%;
+    border-radius:6px;
+    transition:width .4s cubic-bezier(.4,0,.2,1);
+  }
+  .progress-dots{
+    display:flex;
+    justify-content:space-between;
+    margin-top:9px;
+  }
+  .progress-dots span{
+    width:5px; height:5px;
+    border-radius:50%;
+    background:var(--line);
+    transition:background .3s ease, transform .3s ease;
+  }
+  .progress-dots span.done{ background:var(--gold); }
+  .progress-dots span.current{ background:var(--green-mid); transform:scale(1.6); }
+
+  .card{
+    background:var(--white);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:34px 28px 30px;
+    border:1px solid var(--line);
+  }
+  .step{ display:none; }
+  .step.active{ display:block; animation:fade .35s cubic-bezier(.4,0,.2,1); }
+  @keyframes fade{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .step-head{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+    margin-bottom:8px;
+  }
+  .step-num{
+    flex:0 0 auto;
+    width:38px; height:38px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:var(--green-light);
+    border:1px solid var(--green-line);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:var(--green-dark);
+    line-height:1;
+  }
+  .step h2{
+    color:var(--green-dark);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:700;
+    font-size:1.5rem;
+    margin:0;
+    line-height:1.25;
+    letter-spacing:0.1px;
+  }
+  .step-sub{
+    font-size:0.83rem;
+    color:var(--muted);
+    margin:3px 0 0;
+  }
+  .step h3{
+    color:var(--gold-deep);
+    font-size:0.72rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-weight:700;
+    margin:22px 0 2px;
+  }
+  .step > h3:first-of-type{ margin-top:18px; }
+
+  label{
+    display:block;
+    font-size:0.83rem;
+    font-weight:600;
+    margin:17px 0 6px;
+    color:var(--text);
+    letter-spacing:0.1px;
+  }
+  label .opt{
+    font-weight:400;
+    color:var(--muted-soft);
+    font-size:0.73rem;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  input[type=text], input[type=email], input[type=number], input[type=url], input[type=date], textarea, select{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid var(--line);
+    border-radius:var(--radius-sm);
+    font-size:0.92rem;
+    font-family:inherit;
+    background:#fbfdfc;
+    color:var(--text);
+    transition:border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  input::placeholder, textarea::placeholder{ color:#b7c2bc; }
+  input:hover, textarea:hover, select:hover{ border-color:#c7d4cc; }
+  input:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:var(--green-soft);
+    background:var(--white);
+    box-shadow:0 0 0 3.5px rgba(47,107,79,0.13);
+  }
+  textarea{ resize:vertical; min-height:80px; font-family:inherit; }
+
+  .radio-row{
+    display:flex;
+    gap:9px;
+    margin-top:7px;
+    flex-wrap:wrap;
+  }
+  .radio-row label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:500;
+    margin:0;
+    background:var(--green-light);
+    border:1.5px solid transparent;
+    padding:9px 18px;
+    border-radius:22px;
+    cursor:pointer;
+    font-size:0.85rem;
+    color:var(--text);
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .radio-row label:hover{ border-color:var(--green-line); }
+  .radio-row label:has(input:checked){
+    border-color:var(--green-mid);
+    background:var(--green-dark);
+    color:var(--white);
+  }
+  .radio-row input{ width:auto; accent-color:var(--gold); margin:0; }
+
+  /* ---------- Buttons ---------- */
+  .nav-buttons{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:32px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+  button{
+    border:none;
+    border-radius:var(--radius-sm);
+    padding:12px 26px;
+    font-size:0.87rem;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    letter-spacing:0.1px;
+    transition:transform .15s ease, opacity .15s ease, box-shadow .15s ease, background .2s ease;
+  }
+  button:active{ transform:scale(0.97); }
+  .btn-next, .btn-submit{
+    background:linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    color:var(--white);
+    margin-left:auto;
+    box-shadow:0 4px 14px rgba(18,53,40,0.28);
+  }
+  .btn-next:hover, .btn-submit:hover{ box-shadow:0 6px 18px rgba(18,53,40,0.36); }
+  .btn-submit{ background:linear-gradient(135deg, var(--gold-deep), var(--gold)); box-shadow:0 4px 14px rgba(169,127,54,0.32); }
+  .btn-submit:hover{ box-shadow:0 6px 18px rgba(169,127,54,0.4); }
+  .btn-back{
+    background:var(--white);
+    color:var(--green-dark);
+    border:1.5px solid var(--line);
+  }
+  .btn-back:hover{ border-color:var(--green-mid); background:var(--green-light); }
+  .btn-back:disabled{
+    opacity:0;
+    pointer-events:none;
+  }
+  .btn-skip{
+    background:none;
+    color:var(--muted-soft);
+    border:1px dashed var(--line);
+    font-size:0.74rem;
+    padding:9px 14px;
+  }
+
+  .project-block{
+    border:1px solid var(--line);
+    border-radius:var(--radius-md);
+    padding:18px 18px 4px;
+    margin-top:16px;
+    background:linear-gradient(180deg, #fbfdfc, #f8faf9);
+    position:relative;
+  }
+  .project-block h3{ margin-top:0; margin-bottom:2px; }
+
+  /* ---------- Thank you / loading ---------- */
+  .thankyou{
+    display:none;
+    text-align:center;
+    padding:76px 24px;
+  }
+  .thankyou.active{ display:block; animation:fade .45s ease; }
+  .thankyou img{
+    width:78px; height:78px;
+    border-radius:50%;
+    background:var(--white);
+    padding:9px;
+    box-shadow:0 8px 24px rgba(18,53,40,0.18), 0 0 0 1px var(--gold-soft);
+    margin-bottom:20px;
+  }
+  .thankyou h2{
+    color:var(--green-dark);
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.9rem;
+    margin:0 0 10px;
+  }
+  .thankyou p{
+    color:var(--muted);
+    max-width:380px;
+    margin:0 auto;
+    font-size:0.93rem;
+  }
+  .thankyou .divider{
+    width:46px; height:2px;
+    background:var(--gold);
+    margin:20px auto;
+    border-radius:3px;
+  }
+  .error-msg{
+    display:none;
+    background:#fdecec;
+    color:#a52424;
+    padding:12px 15px;
+    border-radius:var(--radius-sm);
+    font-size:0.83rem;
+    margin-top:18px;
+    border:1px solid #f3c9c9;
+  }
+  .error-msg.active{ display:block; animation:fade .2s ease; }
+  .loading{
+    display:none;
+    text-align:center;
+    padding:60px;
+    color:var(--green-dark);
+  }
+  .loading.active{ display:block; }
+  .spinner{
+    width:36px; height:36px;
+    border:3px solid var(--green-light);
+    border-top-color:var(--green-dark);
+    border-right-color:var(--gold);
+    border-radius:50%;
+    margin:0 auto 16px;
+    animation:spin 0.8s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .checkbox-row{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    margin-top:14px;
+    background:var(--green-light);
+    padding:14px 16px;
+    border-radius:var(--radius-sm);
+    border:1px solid var(--green-line);
+  }
+  .checkbox-row input{ width:auto; margin-top:3px; accent-color:var(--green-dark); }
+  .checkbox-row span{ font-size:0.84rem; color:var(--text); }
+  .footer-note{
+    text-align:center;
+    margin-top:28px;
+    font-size:0.72rem;
+    color:var(--muted-soft);
+    letter-spacing:0.4px;
+  }
+  .footer-note .ornament{
+    display:block;
+    margin:0 auto 8px;
+    color:var(--gold);
+    font-size:0.9rem;
+    letter-spacing:6px;
+  }
+
+  /* ========== 3D & ANIMATION ENHANCEMENTS ========== */
+
+  /* --- Canvas particle background --- */
+  #particle-canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    opacity:0.55;
+  }
+
+  /* --- Floating orbs ambient --- */
+  .orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(60px);
+    pointer-events:none;
+    z-index:-1;
+    animation:orbFloat linear infinite;
+  }
+  .orb-1{
+    width:320px; height:320px;
+    background:radial-gradient(circle, rgba(31,77,58,0.18), transparent 70%);
+    top:-80px; left:-80px;
+    animation-duration:18s;
+    animation-name:orbFloat1;
+  }
+  .orb-2{
+    width:260px; height:260px;
+    background:radial-gradient(circle, rgba(195,154,75,0.12), transparent 70%);
+    bottom:10%; right:-60px;
+    animation-duration:22s;
+    animation-name:orbFloat2;
+  }
+  .orb-3{
+    width:180px; height:180px;
+    background:radial-gradient(circle, rgba(47,107,79,0.1), transparent 70%);
+    top:50%; left:60%;
+    animation-duration:28s;
+    animation-name:orbFloat3;
+  }
+  @keyframes orbFloat1{
+    0%{transform:translate(0,0) scale(1);}
+    33%{transform:translate(40px,60px) scale(1.1);}
+    66%{transform:translate(-20px,30px) scale(0.95);}
+    100%{transform:translate(0,0) scale(1);}
+  }
+  @keyframes orbFloat2{
+    0%{transform:translate(0,0) scale(1);}
+    40%{transform:translate(-50px,-40px) scale(1.15);}
+    70%{transform:translate(20px,-20px) scale(0.9);}
+    100%{transform:translate(0,0) scale(1);}
+  }
+  @keyframes orbFloat3{
+    0%{transform:translate(0,0) scale(1);}
+    50%{transform:translate(-30px,50px) scale(1.2);}
+    100%{transform:translate(0,0) scale(1);}
+  }
+
+  /* --- Header 3D depth & glow --- */
+  .header{
+    perspective:800px;
+    transform-style:preserve-3d;
+  }
+  .header-inner{
+    animation:headerReveal 0.9s cubic-bezier(0.23,1,0.32,1) both;
+  }
+  @keyframes headerReveal{
+    from{opacity:0; transform:translateY(-28px) rotateX(12deg); filter:blur(4px);}
+    to{opacity:1; transform:translateY(0) rotateX(0deg); filter:blur(0);}
+  }
+  .header h1{
+    text-shadow: 0 2px 20px rgba(195,154,75,0.35), 0 0 60px rgba(31,77,58,0.4);
+    animation: titleGlow 4s ease-in-out infinite alternate;
+  }
+  @keyframes titleGlow{
+    from{ text-shadow: 0 2px 20px rgba(195,154,75,0.25), 0 0 40px rgba(31,77,58,0.3);}
+    to{ text-shadow: 0 2px 30px rgba(195,154,75,0.55), 0 0 80px rgba(31,77,58,0.5);}
+  }
+  /* Gold shimmer line on header bottom */
+  .header::after{
+    animation: shimmerLine 3s ease-in-out infinite;
+  }
+  @keyframes shimmerLine{
+    0%,100%{opacity:0.7;}
+    50%{opacity:1; box-shadow:0 0 12px rgba(195,154,75,0.6);}
+  }
+
+  /* --- Logo 3D spin-in & pulse --- */
+  .header img{
+    animation: logoEntrance 1.1s cubic-bezier(0.34,1.56,0.64,1) both, logoPulse 5s ease-in-out 1.1s infinite;
+  }
+  @keyframes logoEntrance{
+    from{transform:rotateY(-90deg) scale(0.5); opacity:0;}
+    to{transform:rotateY(0deg) scale(1); opacity:1;}
+  }
+  @keyframes logoPulse{
+    0%,100%{box-shadow:0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,162,75,0.4), 0 0 0 0 rgba(195,154,75,0);}
+    50%{box-shadow:0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,162,75,0.4), 0 0 0 12px rgba(195,154,75,0.15);}
+  }
+
+  /* --- 3D Card Tilt on hover --- */
+  .card{
+    transform-style:preserve-3d;
+    transition:transform 0.15s ease-out, box-shadow 0.4s ease;
+    will-change:transform;
+  }
+  .card:hover{
+    box-shadow:0 24px 60px -12px rgba(18,53,40,0.25), 0 1px 2px rgba(18,53,40,0.06);
+  }
+
+  /* --- Progress bar shimmer --- */
+  .progress-fill{
+    position:relative;
+    overflow:hidden;
+  }
+  .progress-fill::after{
+    content:"";
+    position:absolute;
+    top:0; left:-100%; width:60%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation:shimmer 2.2s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%{left:-100%;}
+    100%{left:200%;}
+  }
+
+  /* --- Step number badge pulse --- */
+  .step-num{
+    animation:badgePop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    position:relative;
+  }
+  .step-num::after{
+    content:"";
+    position:absolute;
+    inset:-4px;
+    border-radius:50%;
+    border:2px solid var(--gold);
+    opacity:0;
+    transform:scale(0.8);
+    animation:ringPulse 3s ease-in-out 1s infinite;
+  }
+  @keyframes badgePop{
+    from{transform:scale(0) rotate(-180deg); opacity:0;}
+    to{transform:scale(1) rotate(0deg); opacity:1;}
+  }
+  @keyframes ringPulse{
+    0%{opacity:0; transform:scale(0.8);}
+    30%{opacity:0.6; transform:scale(1.15);}
+    100%{opacity:0; transform:scale(1.4);}
+  }
+
+  /* --- Input fields 3D focus --- */
+  input[type=text]:focus, input[type=email]:focus, input[type=number]:focus,
+  input[type=url]:focus, input[type=date]:focus, textarea:focus, select:focus{
+    outline:none;
+    border-color:var(--green-soft);
+    background:var(--white);
+    box-shadow:0 0 0 3.5px rgba(47,107,79,0.13), 0 4px 20px rgba(47,107,79,0.12);
+    transform:translateY(-1px);
+    transition:all 0.2s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  /* --- Next / Submit button 3D & glow --- */
+  .btn-next, .btn-submit{
+    position:relative;
+    overflow:hidden;
+    transform:translateZ(0);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-next::before, .btn-submit::before{
+    content:"";
+    position:absolute;
+    top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transition:left 0.4s ease;
+  }
+  .btn-next:hover::before, .btn-submit:hover::before{ left:100%; }
+  .btn-next:hover{ transform:translateY(-3px) scale(1.02); }
+  .btn-submit:hover{ transform:translateY(-3px) scale(1.02); }
+  .btn-submit{
+    animation:submitPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes submitPulse{
+    0%,100%{box-shadow:0 4px 14px rgba(169,127,54,0.32);}
+    50%{box-shadow:0 4px 24px rgba(169,127,54,0.6), 0 0 30px rgba(195,154,75,0.3);}
+  }
+
+  /* --- Step fade with 3D depth --- */
+  .step.active{
+    animation:step3dIn 0.45s cubic-bezier(0.23,1,0.32,1) both;
+  }
+  @keyframes step3dIn{
+    from{opacity:0; transform:translateX(40px) rotateY(8deg); filter:blur(3px);}
+    to{opacity:1; transform:translateX(0) rotateY(0deg); filter:blur(0);}
+  }
+
+  /* --- Progress dots animated --- */
+  .progress-dots span.current{
+    animation:dotPulse 1.4s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%,100%{transform:scale(1.6); box-shadow:0 0 0 0 rgba(47,107,79,0.5);}
+    50%{transform:scale(1.9); box-shadow:0 0 0 5px rgba(47,107,79,0);}
+  }
+
+  /* --- Thank you state 3D entrance --- */
+  .thankyou.active{
+    animation:thankYou3d 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes thankYou3d{
+    from{opacity:0; transform:scale(0.7) rotateY(20deg); filter:blur(6px);}
+    to{opacity:1; transform:scale(1) rotateY(0deg); filter:blur(0);}
+  }
+  .thankyou img{
+    animation:logoEntrance 0.8s cubic-bezier(0.34,1.56,0.64,1) both, logoPulse 4s ease-in-out 0.8s infinite;
+  }
+
+  /* --- Spinner 3D --- */
+  .spinner{
+    border:3px solid var(--green-light);
+    border-top-color:var(--green-dark);
+    border-right-color:var(--gold);
+    box-shadow:0 0 15px rgba(195,154,75,0.3);
+  }
+
+  /* --- Project blocks hover --- */
+  .project-block{
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .project-block:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(18,53,40,0.1);
+  }
+
+  /* --- Radio pill 3D select --- */
+  .radio-row label:has(input:checked){
+    transform:scale(1.03) translateY(-1px);
+    box-shadow:0 4px 12px rgba(18,53,40,0.2);
+    transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  /* --- Floating label animation on input --- */
+  label{
+    transition:color 0.2s ease;
+  }
+  input:focus ~ label, textarea:focus ~ label{
+    color:var(--green-dark);
+  }
+
+  /* --- Progress wrap entrance --- */
+  .progress-wrap{
+    animation:slideDown 0.5s cubic-bezier(0.23,1,0.32,1) 0.3s both;
+  }
+  @keyframes slideDown{
+    from{opacity:0; transform:translateY(-14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* --- Eyebrow text animated --- */
+  .eyebrow{
+    animation:eyebrowIn 0.7s cubic-bezier(0.23,1,0.32,1) 0.2s both;
+  }
+  @keyframes eyebrowIn{
+    from{opacity:0; letter-spacing:8px;}
+    to{opacity:1; letter-spacing:3.5px;}
+  }
+
+  /* Reduced motion fallback */
+  @media(prefers-reduced-motion:reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important;
+      transition-duration:0.01ms !important;
+    }
+  }
+
+  @media (max-width:420px){
+    .header{ padding:44px 18px 36px; }
+    .header h1{ font-size:1.7rem; }
+    .card{ padding:26px 18px 24px; }
+    button{ padding:11px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Particle canvas -->
+<canvas id="particle-canvas"></canvas>
+<!-- Ambient orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="header">
+  <div class="pattern"></div>
+  <div class="header-inner">
+    <img src="images.png" alt="As-Sa'adah logo">
+    <div class="eyebrow">Student Success Record</div>
+    <h1>As-Sa&#699;adah Student Achievement &amp; Transformation Form</h1>
+    <p>Share your journey with us — projects, skills, and growth</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <div class="progress-stepname" id="progressLabel">Student Information</div>
+      <div class="progress-count" id="progressCount">01 / 10</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <form id="studentForm">
+  <div class="card" id="formCard">
+
+    <!-- STEP 1: Student Info -->
+    <div class="step active" data-step="1">
+      <div class="step-head">
+        <span class="step-num">1</span>
+        <div>
+          <h2>Student Information</h2>
+          <p class="step-sub">The basics — who you are and where you started.</p>
+        </div>
+      </div>
+      <label>Full Name</label>
+      <input type="text" name="full_name" required>
+
+      <label>Batch <span class="opt">(optional)</span></label>
+      <input type="text" name="batch">
+
+      <label>Section <span class="opt">(optional)</span></label>
+      <input type="text" name="section">
+
+      <label>Course <span class="opt">(optional)</span></label>
+      <input type="text" name="course">
+
+      <label>Course Start Date</label>
+      <input type="date" name="course_started">
+
+      <label>Previous Education <span class="opt">(optional)</span></label>
+      <input type="text" name="previous_education">
+
+      <label>Current Occupation <span class="opt">(optional)</span></label>
+      <input type="text" name="current_occupation">
+    </div>
+
+    <!-- STEP 2: Learning Journey -->
+    <div class="step" data-step="2">
+      <div class="step-head">
+        <span class="step-num">2</span>
+        <div>
+          <h2>Learning Journey</h2>
+          <p class="step-sub">What brought you here, in your own words.</p>
+        </div>
+      </div>
+      <label>What were you doing before joining As-Sa'adah?</label>
+      <textarea name="before_joining"></textarea>
+
+      <label>Why did you join?</label>
+      <textarea name="why_joined"></textarea>
+
+      <label>Skills learned so far</label>
+      <textarea name="skills_learned"></textarea>
+    </div>
+
+    <!-- STEP 3: Main Projects -->
+    <div class="step" data-step="3">
+      <div class="step-head">
+        <span class="step-num">3</span>
+        <div>
+          <h2>Main Projects</h2>
+          <p class="step-sub">Your flagship work — up to three projects.</p>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <h3>Project 1</h3>
+        <label>Name</label><input type="text" name="proj1_name">
+        <label>Description</label><textarea name="proj1_desc"></textarea>
+        <label>Tech Used</label><input type="text" name="proj1_tech">
+        <label>Live Demo Link <span class="opt">(optional)</span></label><input type="url" name="proj1_demo">
+        <label>GitHub Link <span class="opt">(optional)</span></label><input type="url" name="proj1_github">
+      </div>
+
+      <div class="project-block">
+        <h3>Project 2 <span class="opt">(optional)</span></h3>
+        <label>Name</label><input type="text" name="proj2_name">
+        <label>Description</label><textarea name="proj2_desc"></textarea>
+        <label>Tech Used</label><input type="text" name="proj2_tech">
+        <label>Live Demo Link</label><input type="url" name="proj2_demo">
+        <label>GitHub Link</label><input type="url" name="proj2_github">
+      </div>
+
+      <div class="project-block">
+        <h3>Project 3 <span class="opt">(optional)</span></h3>
+        <label>Name</label><input type="text" name="proj3_name">
+        <label>Description</label><textarea name="proj3_desc"></textarea>
+        <label>Tech Used</label><input type="text" name="proj3_tech">
+        <label>Live Demo Link</label><input type="url" name="proj3_demo">
+        <label>GitHub Link</label><input type="url" name="proj3_github">
+      </div>
+    </div>
+
+    <!-- STEP 4: Practice Projects -->
+    <div class="step" data-step="4">
+      <div class="step-head">
+        <span class="step-num">4</span>
+        <div>
+          <h2>Practice Projects</h2>
+          <p class="step-sub">Smaller builds that sharpened your skills.</p>
+        </div>
+      </div>
+      <label>Summary of practice projects (list them briefly, one per line)</label>
+      <textarea name="practice_projects_summary" rows="6" placeholder="e.g. To-do app - HTML/CSS/JS&#10;Weather app - API integration&#10;..."></textarea>
+    </div>
+
+    <!-- STEP 5: Certifications -->
+    <div class="step" data-step="5">
+      <div class="step-head">
+        <span class="step-num">5</span>
+        <div>
+          <h2>Certifications</h2>
+          <p class="step-sub">Credentials that back up what you've learned.</p>
+        </div>
+      </div>
+
+      <div class="project-block">
+        <h3>Certification 1</h3>
+        <label>Name</label><input type="text" name="cert1_name">
+        <label>Issuing Organization</label><input type="text" name="cert1_org">
+        <label>Date</label><input type="date" name="cert1_date">
+        <label>Skills Covered</label><input type="text" name="cert1_skills">
+        <label>Link <span class="opt">(optional)</span></label><input type="url" name="cert1_link">
+      </div>
+
+      <div class="project-block">
+        <h3>Certification 2 <span class="opt">(optional)</span></h3>
+        <label>Name</label><input type="text" name="cert2_name">
+        <label>Issuing Organization</label><input type="text" name="cert2_org">
+        <label>Date</label><input type="date" name="cert2_date">
+        <label>Skills Covered</label><input type="text" name="cert2_skills">
+        <label>Link</label><input type="url" name="cert2_link">
+      </div>
+    </div>
+
+    <!-- STEP 6: AI & Tech Achievements -->
+    <div class="step" data-step="6">
+      <div class="step-head">
+        <span class="step-num">6</span>
+        <div>
+          <h2>AI &amp; Tech Achievements</h2>
+          <p class="step-sub">How you've put modern tools to work.</p>
+        </div>
+      </div>
+      <label>AI tools you have used</label>
+      <textarea name="ai_tools_used"></textarea>
+
+      <label>Have you built something using AI?</label>
+      <div class="radio-row">
+        <label><input type="radio" name="ai_built" value="Yes"> Yes</label>
+        <label><input type="radio" name="ai_built" value="No"> No</label>
+      </div>
+
+      <label>Have you integrated AI into a project?</label>
+      <div class="radio-row">
+        <label><input type="radio" name="ai_integrated" value="Yes"> Yes</label>
+        <label><input type="radio" name="ai_integrated" value="No"> No</label>
+      </div>
+
+      <label>If yes, describe how</label>
+      <textarea name="ai_integrated_desc"></textarea>
+    </div>
+
+    <!-- STEP 7: Social Presence -->
+    <div class="step" data-step="7">
+      <div class="step-head">
+        <span class="step-num">7</span>
+        <div>
+          <h2>Social Presence</h2>
+          <p class="step-sub">Where your work and voice show up online.</p>
+        </div>
+      </div>
+      <label>LinkedIn URL</label><input type="url" name="linkedin_url">
+      <label>LinkedIn Followers</label><input type="number" name="linkedin_followers">
+      <label>LinkedIn Connections</label><input type="number" name="linkedin_connections">
+      <label>LinkedIn Start Date</label><input type="date" name="linkedin_start_date">
+      <label>Biggest LinkedIn Achievement</label><textarea name="linkedin_achievement"></textarea>
+      <label>Total LinkedIn Impressions <span class="opt">(optional)</span></label><input type="text" name="linkedin_impressions">
+      <label>Best Performing Post Link <span class="opt">(optional)</span></label><input type="url" name="linkedin_best_post">
+
+      <label>Instagram URL <span class="opt">(optional)</span></label><input type="url" name="instagram_url">
+      <label>Instagram Followers <span class="opt">(optional)</span></label><input type="number" name="instagram_followers">
+
+      <label>GitHub URL <span class="opt">(optional)</span></label><input type="url" name="github_url">
+      <label>Portfolio URL <span class="opt">(optional)</span></label><input type="url" name="portfolio_url">
+      <label>YouTube URL <span class="opt">(optional)</span></label><input type="url" name="youtube_url">
+      <label>Facebook URL <span class="opt">(optional)</span></label><input type="url" name="facebook_url">
+    </div>
+
+    <!-- STEP 8: Content & Measurable Achievements -->
+    <div class="step" data-step="8">
+      <div class="step-head">
+        <span class="step-num">8</span>
+        <div>
+          <h2>Content, Publishing &amp; Measurable Achievements</h2>
+          <p class="step-sub">The numbers that show your growth.</p>
+        </div>
+      </div>
+      <label>Published work summary (articles, posts, etc.)</label>
+      <textarea name="published_work_summary"></textarea>
+
+      <h3>Measurable Achievements (numbers)</h3>
+      <label>Projects Completed</label><input type="number" name="measurable_projects_completed">
+      <label>Projects Deployed</label><input type="number" name="measurable_projects_deployed">
+      <label>Certifications Earned</label><input type="number" name="measurable_certifications">
+      <label>LinkedIn Followers Gained</label><input type="number" name="measurable_linkedin_followers_gained">
+      <label>LinkedIn Impressions</label><input type="text" name="measurable_linkedin_impressions">
+      <label>Articles Written</label><input type="number" name="measurable_articles">
+      <label>Newsletter Subscribers</label><input type="number" name="measurable_newsletter_subs">
+      <label>GitHub Repos</label><input type="number" name="measurable_github_repos">
+      <label>Freelance Clients</label><input type="number" name="measurable_freelance_clients">
+      <label>Job Opportunities Received</label><input type="number" name="measurable_job_opportunities">
+      <label>Income Generated <span class="opt">(optional)</span></label><input type="text" name="measurable_income">
+    </div>
+
+    <!-- STEP 9: Transformation Story -->
+    <div class="step" data-step="9">
+      <div class="step-head">
+        <span class="step-num">9</span>
+        <div>
+          <h2>Opportunities &amp; Transformation Story</h2>
+          <p class="step-sub">The before and after of your journey.</p>
+        </div>
+      </div>
+      <label>Describe opportunities created because of this journey</label>
+      <textarea name="opportunities_desc"></textarea>
+
+      <label>Where were you before As-Sa'adah?</label>
+      <textarea name="before_saadah"></textarea>
+
+      <label>Where are you now, after As-Sa'adah?</label>
+      <textarea name="after_saadah"></textarea>
+
+      <label>Biggest lesson learned</label>
+      <textarea name="biggest_lesson"></textarea>
+
+      <label>Project you're most proud of</label>
+      <input type="text" name="proudest_project">
+
+      <label>Achievement you're most proud of</label>
+      <textarea name="proudest_achievement"></textarea>
+
+      <label>Your next target/goal</label>
+      <textarea name="next_target"></textarea>
+    </div>
+
+    <!-- STEP 10: Final Message & Permission -->
+    <div class="step" data-step="10">
+      <div class="step-head">
+        <span class="step-num">10</span>
+        <div>
+          <h2>Message &amp; Permission</h2>
+          <p class="step-sub">Almost done — a few final details.</p>
+        </div>
+      </div>
+      <label>Message to future students</label>
+      <textarea name="message_to_students"></textarea>
+
+      <label>Do you give permission to feature your story/work publicly?</label>
+      <div class="radio-row">
+        <label><input type="radio" name="permission_to_feature" value="Yes"> Yes</label>
+        <label><input type="radio" name="permission_to_feature" value="No"> No</label>
+      </div>
+
+      <label>Preferred Publication Name <span class="opt">(optional, if different from full name)</span></label>
+      <input type="text" name="publication_name">
+
+      <label>Any private info you'd like to add <span class="opt">(kept confidential, optional)</span></label>
+      <textarea name="private_info"></textarea>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="confirmCheck" required>
+        <span>I confirm the information above is accurate to the best of my knowledge.</span>
+      </div>
+    </div>
+
+    <div class="error-msg" id="errorMsg">Kuch masla ho gaya — dobara koshish karein ya required fields check karein.</div>
+
+    <div class="nav-buttons">
+      <button type="button" class="btn-back" id="backBtn">Back</button>
+      <button type="button" class="btn-next" id="nextBtn">Next</button>
+    </div>
+  </div>
+  </form>
+
+  <div class="loading" id="loadingState">
+    <div class="spinner"></div>
+    <p>Submitting your form...</p>
+  </div>
+
+  <div class="thankyou" id="thankyouState">
+    <img src="images.png" alt="As-Sa'adah logo">
+    <div class="divider"></div>
+    <h2>Jazak Allah Khair!</h2>
+    <p>Aap ka form successfully submit ho gaya hai. As-Sa'adah team aap ki journey ki qadar karti hai.</p>
+  </div>
+
+  <div class="footer-note">
+    As-Sa'adah &middot; Student Achievement Records
+  </div>
+
+</div>
+
+<script>
+  // ⚠️ IMPORTANT: Apna Google Apps Script Web App URL yahan paste karein ⚠️
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzu9r49FlF3b055aorpErRXIUa4XTa_1_RQmyhZ0xa2h1Iy9nbn4z-sHOTHEhSlw2kY/exec";
+
+  const steps = Array.from(document.querySelectorAll('.step'));
+  const totalSteps = steps.length;
+  let currentStep = 1;
+
+  const stepNames = [
+    'Student Information','Learning Journey','Main Projects','Practice Projects',
+    'Certifications','AI & Tech Achievements','Social Presence',
+    'Content & Achievements','Transformation Story','Message & Permission'
+  ];
+
+  const progressFill = document.getElementById('progressFill');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressCount = document.getElementById('progressCount');
+  const progressDots = document.getElementById('progressDots');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const form = document.getElementById('studentForm');
+  const formCard = document.getElementById('formCard');
+  const loadingState = document.getElementById('loadingState');
+  const thankyouState = document.getElementById('thankyouState');
+
+  // build progress dots once
+  for (let i = 1; i <= totalSteps; i++){
+    const dot = document.createElement('span');
+    dot.dataset.step = i;
+    progressDots.appendChild(dot);
+  }
+  const dotEls = Array.from(progressDots.children);
+
+  function pad(n){ return n < 10 ? '0' + n : '' + n; }
+
+  function showStep(n){
+    steps.forEach(s => s.classList.remove('active'));
+    document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+    progressFill.style.width = (n/totalSteps*100) + '%';
+    progressLabel.textContent = stepNames[n-1] || `Step ${n}`;
+    progressCount.textContent = `${pad(n)} / ${pad(totalSteps)}`;
+    dotEls.forEach((d, i) => {
+      d.classList.toggle('done', i < n-1);
+      d.classList.toggle('current', i === n-1);
+    });
+    backBtn.disabled = (n === 1);
+    nextBtn.textContent = (n === totalSteps) ? 'Submit' : 'Next';
+    nextBtn.classList.toggle('btn-submit', n === totalSteps);
+    errorMsg.classList.remove('active');
+    window.scrollTo({top: formCard.offsetTop - 20, behavior:'smooth'});
+  }
+
+  function validateCurrentStep(){
+    const activeStep = document.querySelector('.step.active');
+    const requiredFields = activeStep.querySelectorAll('[required]');
+    for (const field of requiredFields){
+      if (field.type === 'checkbox' && !field.checked){
+        return false;
+      }
+      if (field.type !== 'checkbox' && !field.value.trim()){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 1){
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (!validateCurrentStep()){
+      errorMsg.textContent = 'Ye fields zaroori hain — please fill karein.';
+      errorMsg.classList.add('active');
+      return;
+    }
+
+    if (currentStep < totalSteps){
+      currentStep++;
+      showStep(currentStep);
+    } else {
+      submitForm();
+    }
+  });
+
+  function submitForm(){
+    if (APPS_SCRIPT_URL === "PASTE_YOUR_APPS_SCRIPT_URL_HERE"){
+      errorMsg.textContent = 'Form abhi live nahi hai — Apps Script URL add hone ka intezar hai.';
+      errorMsg.classList.add('active');
+      return;
+    }
+
+    formCard.style.display = 'none';
+    loadingState.classList.add('active');
+
+    const formData = new FormData(form);
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      loadingState.classList.remove('active');
+      thankyouState.classList.add('active');
+    })
+    .catch(err => {
+      loadingState.classList.remove('active');
+      formCard.style.display = 'block';
+      errorMsg.textContent = 'Submit karte waqt masla hua. Dobara koshish karein.';
+      errorMsg.classList.add('active');
+      console.error(err);
+    });
+  }
+
+  showStep(currentStep);
+</script>
+
+<script>
+/* ====== PARTICLE SYSTEM ====== */
+(function(){
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  const COLORS = ['rgba(195,154,75,', 'rgba(47,107,79,', 'rgba(31,77,58,', 'rgba(233,220,184,'];
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function Particle(){
+    this.reset();
+  }
+  Particle.prototype.reset = function(){
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.r = Math.random() * 1.8 + 0.3;
+    this.alpha = Math.random() * 0.5 + 0.1;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3 - 0.1;
+    this.life = 0;
+    this.maxLife = Math.random() * 300 + 150;
+    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+  };
+  Particle.prototype.update = function(){
+    this.x += this.vx;
+    this.y += this.vy;
+    this.life++;
+    if(this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  };
+  Particle.prototype.draw = function(){
+    const progress = this.life / this.maxLife;
+    const a = this.alpha * Math.sin(Math.PI * progress);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = this.color + a + ')';
+    ctx.fill();
+  };
+
+  /* Generate 60 particles */
+  for(let i = 0; i < 60; i++){
+    const p = new Particle();
+    p.life = Math.floor(Math.random() * p.maxLife); /* stagger start */
+    particles.push(p);
+  }
+
+  /* Draw connecting lines between nearby particles */
+  function drawConnections(){
+    for(let i = 0; i < particles.length; i++){
+      for(let j = i+1; j < particles.length; j++){
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 100){
+          const a = (1 - dist/100) * 0.08;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = 'rgba(195,154,75,' + a + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0, 0, W, H);
+    drawConnections();
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ====== 3D CARD TILT ====== */
+(function(){
+  const card = document.getElementById('formCard');
+  if(!card) return;
+
+  let bounds;
+  function update(e){
+    bounds = card.getBoundingClientRect();
+    const cx = bounds.left + bounds.width / 2;
+    const cy = bounds.top + bounds.height / 2;
+    const dx = (e.clientX - cx) / (bounds.width / 2);
+    const dy = (e.clientY - cy) / (bounds.height / 2);
+    const rotX = -dy * 1.5;
+    const rotY = dx * 1.5;
+    card.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  }
+  function reset(){
+    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+  }
+
+  /* Only on desktop */
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    card.addEventListener('mousemove', update);
+    card.addEventListener('mouseleave', reset);
+  }
+})();
+
+/* ====== TYPING CURSOR on h1 ====== */
+(function(){
+  const h1 = document.querySelector('.header h1');
+  if(!h1) return;
+  const cursor = document.createElement('span');
+  cursor.textContent = '|';
+  cursor.style.cssText = 'color:rgba(195,154,75,0.7);margin-left:2px;animation:blink 1s step-end infinite;';
+  const style = document.createElement('style');
+  style.textContent = '@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}';
+  document.head.appendChild(style);
+  h1.appendChild(cursor);
+  /* Remove after 4s */
+  setTimeout(() => cursor.remove(), 4000);
+})();
+
+/* ====== COUNTER ANIMATION for number inputs ====== */
+(function(){
+  const numInputs = document.querySelectorAll('input[type=number]');
+  numInputs.forEach(inp => {
+    inp.addEventListener('focus', () => {
+      inp.style.transition = 'all 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+      inp.style.transform = 'scale(1.02) translateY(-2px)';
+    });
+    inp.addEventListener('blur', () => {
+      inp.style.transform = 'scale(1) translateY(0)';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
