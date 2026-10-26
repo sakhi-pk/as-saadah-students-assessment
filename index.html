@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrepreneur Strength Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bricolage+Grotesque:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#534AB7;
+  --purple-light:#EEEDFE;
+  --purple-dark:#3C3489;
+  --purple-mid:#7F77DD;
+  --text:#1a1a2e;
+  --text-muted:#64647a;
+  --text-hint:#9999b0;
+  --bg:#f7f7fb;
+  --surface:#ffffff;
+  --border:#e2e2ef;
+  --border-hover:#c5c5df;
+  --radius:12px;
+  --radius-sm:8px;
+  --success:#10b981;
+  --danger:#dc2626;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:0;
+}
+.top-bar{
+  width:100%;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:16px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  color:var(--purple);
+  letter-spacing:-.02em;
+}
+.prog-wrap{flex:1;max-width:340px;margin:0 24px}
+.prog-track{height:5px;background:var(--border);border-radius:99px;overflow:hidden}
+.prog-fill{height:5px;background:linear-gradient(90deg,var(--purple-mid),var(--purple));border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.prog-label{font-size:12px;color:var(--text-hint);margin-top:5px;text-align:right}
+.step-counter{font-size:13px;color:var(--text-muted);font-weight:500;white-space:nowrap}
+
+.hero{
+  width:100%;
+  max-width:640px;
+  padding:64px 24px 32px;
+  text-align:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--purple);background:var(--purple-light);
+  padding:5px 14px;border-radius:99px;margin-bottom:20px;
+}
+.hero h1{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(28px,5vw,44px);
+  font-weight:700;
+  color:var(--text);
+  line-height:1.15;
+  letter-spacing:-.03em;
+  margin-bottom:16px;
+}
+.hero h1 span{color:var(--purple)}
+.hero p{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:480px;margin:0 auto 28px}
+.hero-meta{
+  display:flex;align-items:center;justify-content:center;gap:20px;
+  font-size:13px;color:var(--text-hint);margin-bottom:36px;
+}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-meta svg{width:14px;height:14px;stroke:var(--purple);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.deliverables{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;
+  text-align:left;max-width:480px;margin:0 auto 36px;
+}
+.deli-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--text-muted);
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 12px;
+}
+.deli-item svg{width:14px;height:14px;stroke:var(--success);fill:none;stroke-width:2.5;flex-shrink:0}
+.btn-start{
+  font-family:'Inter',sans-serif;
+  font-size:16px;font-weight:600;
+  padding:14px 36px;
+  background:var(--purple);color:#fff;
+  border:none;border-radius:var(--radius);
+  cursor:pointer;
+  transition:background .2s,transform .1s,box-shadow .2s;
+  box-shadow:0 4px 20px rgba(83,74,183,.25);
+}
+.btn-start:hover{background:var(--purple-dark);transform:translateY(-1px);box-shadow:0 6px 28px rgba(83,74,183,.35)}
+.btn-start:active{transform:scale(.98)}
+.btn-start:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.qa-wrap{
+  width:100%;max-width:640px;
+  padding:32px 24px 100px;
+  display:none;
+}
+.section-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--purple);margin-bottom:10px;
+}
+.slide{display:none;animation:slideIn .35s cubic-bezier(.4,0,.2,1)}
+.slide.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideBack{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
+.slide.back{animation:slideBack .35s cubic-bezier(.4,0,.2,1)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+
+.q-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(20px,4vw,26px);
+  font-weight:700;
+  color:var(--text);
+  line-height:1.25;
+  letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.q-title .req{color:var(--danger);margin-left:4px}
+.q-sub{font-size:14px;color:var(--text-muted);line-height:1.65;margin-bottom:20px}
+
+textarea{
+  width:100%;
+  min-height:120px;
+  padding:14px 16px;
+  font-size:15px;
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius);
+  resize:vertical;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  line-height:1.6;
+}
+textarea:focus{border-color:var(--purple);box-shadow:0 0 0 4px rgba(83,74,183,.1)}
+textarea::placeholder{color:var(--text-hint)}
+textarea.invalid,.invalid-group{border-color:var(--danger)}
+textarea.invalid:focus{box-shadow:0 0 0 4px rgba(220,38,38,.12)}
+.invalid-group{border:1.5px solid var(--danger);border-radius:var(--radius);padding:8px}
+
+.field-meta{display:flex;justify-content:space-between;gap:12px;margin-top:8px;min-height:20px}
+.field-error{font-size:13px;color:var(--danger);font-weight:500;visibility:hidden}
+.field-error.show{visibility:visible}
+.field-count{font-size:12px;color:var(--text-hint);white-space:nowrap}
+
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check-item{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:border-color .2s,background .2s,transform .1s;
+  font-size:14px;color:var(--text);
+  user-select:none;
+}
+.check-item:hover{border-color:var(--purple-mid);background:var(--purple-light)}
+.check-item.selected{border-color:var(--purple);background:var(--purple-light);color:var(--purple-dark)}
+.check-item:active{transform:scale(.98)}
+.check-item input{accent-color:var(--purple);width:15px;height:15px;flex-shrink:0;pointer-events:none}
+
+.radio-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.radio-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 16px;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+  font-size:15px;color:var(--text);
+  user-select:none;
+}
+.radio-item:hover{border-color:var(--purple-mid);background:var(--purple-light)}
+.radio-item.selected{border-color:var(--purple);background:var(--purple-light);color:var(--purple-dark);font-weight:500}
+.radio-item input{accent-color:var(--purple);width:16px;height:16px;flex-shrink:0;pointer-events:none}
+
+.nav-row{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding:16px 24px;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  z-index:100;
+}
+.btn-back{
+  font-family:'Inter',sans-serif;
+  font-size:14px;font-weight:500;
+  padding:11px 22px;
+  background:transparent;color:var(--text-muted);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:border-color .2s,color .2s,background .2s;
+}
+.btn-back:hover{border-color:var(--border-hover);color:var(--text);background:var(--bg)}
+.btn-next{
+  font-family:'Inter',sans-serif;
+  font-size:15px;font-weight:600;
+  padding:12px 32px;
+  background:var(--purple);color:#fff;
+  border:none;border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:background .2s,transform .1s,box-shadow .2s,opacity .2s;
+  box-shadow:0 2px 12px rgba(83,74,183,.2);
+}
+.btn-next:hover{background:var(--purple-dark);box-shadow:0 4px 18px rgba(83,74,183,.3)}
+.btn-next:active{transform:scale(.98)}
+.btn-next.locked{opacity:.45;box-shadow:none}
+.btn-next.locked:hover{background:var(--purple)}
+
+.result-screen{
+  text-align:center;
+  padding:48px 24px;
+  max-width:480px;
+  margin:0 auto;
+}
+.result-icon{
+  width:72px;height:72px;
+  background:var(--purple-light);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+}
+.result-icon svg{width:34px;height:34px;stroke:var(--purple);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.result-title{
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:28px;font-weight:700;
+  color:var(--text);letter-spacing:-.02em;
+  margin-bottom:12px;
+}
+.result-sub{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:28px}
+.btn-review{
+  display:block;margin:0 auto 16px;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+  background:none;border:none;color:var(--purple);cursor:pointer;text-decoration:underline;
+}
+
+.report-section{
+  text-align:left;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  margin-bottom:16px;
+}
+.report-label{
+  font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--text-hint);margin-bottom:12px;
+}
+.report-content{font-size:14px;color:var(--text-muted);line-height:1.7;white-space:pre-wrap}
+
+.loading-indicator{
+  display:flex;align-items:center;gap:10px;
+  font-size:14px;color:var(--text-muted);
+  padding:16px;
+  background:var(--purple-light);
+  border-radius:var(--radius-sm);
+  margin-bottom:16px;
+}
+.spinner{
+  width:18px;height:18px;
+  border:2px solid var(--border);
+  border-top-color:var(--purple);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  flex-shrink:0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.error-box{
+  background:#fff5f5;border:1px solid #fecaca;
+  border-radius:var(--radius-sm);padding:14px;
+  font-size:14px;color:#b91c1c;margin-bottom:16px;
+  display:none;
+}
+
+.copy-btn{
+  font-family:'Inter',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:8px 18px;
+  background:transparent;color:var(--purple);
+  border:1.5px solid var(--purple-light);
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  transition:background .2s;
+  margin-top:12px;
+}
+.copy-btn:hover{background:var(--purple-light)}
+
+@media(max-width:600px){
+  .check-grid,.deliverables{grid-template-columns:1fr}
+  .hero{padding:48px 20px 24px}
+  .qa-wrap{padding:24px 20px 100px}
+  .prog-wrap{max-width:200px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar" id="top-bar">
+  <div class="logo">StrengthMap</div>
+  <div class="prog-wrap" id="prog-wrap" style="display:none">
+    <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div class="prog-label" id="prog-label">0 of 16 answered</div>
+  </div>
+  <div class="step-counter" id="step-counter" style="display:none">Question <span id="cur-num">1</span> of 16</div>
+</div>
+
+<div class="hero" id="hero-screen">
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Free · 10 minutes
+  </div>
+  <h1>Discover your <span>entrepreneur type</span> &amp; best niche</h1>
+  <p>Answer all 16 honest questions and receive a personalised report with your strength profile, business model, top niches, and a 90-day action plan.</p>
+  <div class="hero-meta">
+    <span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      10 minutes
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Private &amp; secure
+    </span>
+    <span>
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+      AI-powered report
+    </span>
+  </div>
+  <div class="deliverables">
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Strength Profile</div>
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Entrepreneur Type</div>
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Top 5 Niches</div>
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Personal Brand Statement</div>
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Skill Gap Analysis</div>
+    <div class="deli-item"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>90-Day Action Plan</div>
+  </div>
+  <button class="btn-start" onclick="startAssessment()">Start the assessment →</button>
+</div>
+
+<div class="qa-wrap" id="qa-wrap">
+
+  <div class="slide" data-id="0">
+    <div class="section-eyebrow">Section 1 — About you</div>
+    <div class="q-title">Why do you want to become successful in life?</div>
+    <div class="q-sub">Examples: financial freedom, supporting family, creating impact, building something meaningful, personal growth.</div>
+    <textarea id="a0" placeholder="Share your honest reason..."></textarea>
+  </div>
+
+  <div class="slide" data-id="1">
+    <div class="section-eyebrow">Section 1 — About you</div>
+    <div class="q-title">Why do you want to become an entrepreneur?</div>
+    <div class="q-sub">What excites you most about entrepreneurship?</div>
+    <textarea id="a1" placeholder="What draws you to building your own path..."></textarea>
+  </div>
+
+  <div class="slide" data-id="2">
+    <div class="section-eyebrow">Section 1 — About you</div>
+    <div class="q-title">Why now?</div>
+    <div class="q-sub">What is motivating you to take action today instead of waiting another year?</div>
+    <textarea id="a2" placeholder="What has changed that makes this the right moment..."></textarea>
+  </div>
+
+  <div class="slide" data-id="3">
+    <div class="section-eyebrow">Section 1 — About you</div>
+    <div class="q-title">What has stopped you from starting before?</div>
+    <div class="q-sub">Select all that apply (at least one).</div>
+    <div class="check-grid" id="cg3">
+      <label class="check-item"><input type="checkbox" value="Lack of confidence"> Lack of confidence</label>
+      <label class="check-item"><input type="checkbox" value="Lack of money"> Lack of money</label>
+      <label class="check-item"><input type="checkbox" value="Lack of skills"> Lack of skills</label>
+      <label class="check-item"><input type="checkbox" value="Fear of failure"> Fear of failure</label>
+      <label class="check-item"><input type="checkbox" value="Fear of judgment"> Fear of judgment</label>
+      <label class="check-item"><input type="checkbox" value="No clear idea"> No clear idea</label>
+      <label class="check-item"><input type="checkbox" value="Family pressure"> Family pressure</label>
+      <label class="check-item"><input type="checkbox" value="Lack of mentorship"> Lack of mentorship</label>
+      <label class="check-item"><input type="checkbox" value="Time constraints"> Time constraints</label>
+      <label class="check-item"><input type="checkbox" value="Other"> Other</label>
+    </div>
+  </div>
+
+  <div class="slide" data-id="4">
+    <div class="section-eyebrow">Section 2 — Your strengths</div>
+    <div class="q-title">What activities make you lose track of time?</div>
+    <div class="q-sub">Think about hobbies, work tasks, or side projects where hours feel like minutes.</div>
+    <textarea id="a4" placeholder="When I'm doing this, time disappears..."></textarea>
+  </div>
+
+  <div class="slide" data-id="5">
+    <div class="section-eyebrow">Section 2 — Your strengths</div>
+    <div class="q-title">What do people usually ask you for help with?</div>
+    <div class="q-sub">Friends, family, colleagues — what do they come to you for?</div>
+    <textarea id="a5" placeholder="People always come to me when they need help with..."></textarea>
+  </div>
+
+  <div class="slide" data-id="6">
+    <div class="section-eyebrow">Section 2 — Your strengths</div>
+    <div class="q-title">What are your strongest skills today?</div>
+    <div class="q-sub">Select between 1 and 5 skills.</div>
+    <div class="check-grid" id="cg6">
+      <label class="check-item"><input type="checkbox" value="Communication"> Communication</label>
+      <label class="check-item"><input type="checkbox" value="Writing"> Writing</label>
+      <label class="check-item"><input type="checkbox" value="Teaching"> Teaching</label>
+      <label class="check-item"><input type="checkbox" value="Sales"> Sales</label>
+      <label class="check-item"><input type="checkbox" value="Public Speaking"> Public Speaking</label>
+      <label class="check-item"><input type="checkbox" value="Technology"> Technology</label>
+      <label class="check-item"><input type="checkbox" value="Design"> Design</label>
+      <label class="check-item"><input type="checkbox" value="Leadership"> Leadership</label>
+      <label class="check-item"><input type="checkbox" value="Research"> Research</label>
+      <label class="check-item"><input type="checkbox" value="Problem Solving"> Problem Solving</label>
+      <label class="check-item"><input type="checkbox" value="Marketing"> Marketing</label>
+      <label class="check-item"><input type="checkbox" value="Social Media"> Social Media</label>
+      <label class="check-item"><input type="checkbox" value="Video Creation"> Video Creation</label>
+      <label class="check-item"><input type="checkbox" value="Networking"> Networking</label>
+      <label class="check-item"><input type="checkbox" value="Organizing"> Organizing</label>
+      <label class="check-item"><input type="checkbox" value="Coaching"> Coaching</label>
+      <label class="check-item"><input type="checkbox" value="Data Analysis"> Data Analysis</label>
+      <label class="check-item"><input type="checkbox" value="Coding"> Coding</label>
+      <label class="check-item"><input type="checkbox" value="Customer Service"> Customer Service</label>
+      <label class="check-item"><input type="checkbox" value="Project Management"> Project Management</label>
+    </div>
+  </div>
+
+  <div class="slide" data-id="7">
+    <div class="section-eyebrow">Section 2 — Your strengths</div>
+    <div class="q-title">If money wasn't a concern, what would you spend most of your time doing?</div>
+    <div class="q-sub">Imagine total freedom — how would you fill your days?</div>
+    <textarea id="a7" placeholder="I would spend my days..."></textarea>
+  </div>
+
+  <div class="slide" data-id="8">
+    <div class="section-eyebrow">Section 3 — Interests &amp; passions</div>
+    <div class="q-title">Which topics do you naturally enjoy learning about?</div>
+    <div class="q-sub">Select all that apply (at least one).</div>
+    <div class="check-grid" id="cg8">
+      <label class="check-item"><input type="checkbox" value="Business"> Business</label>
+      <label class="check-item"><input type="checkbox" value="Technology"> Technology</label>
+      <label class="check-item"><input type="checkbox" value="AI"> AI</label>
+      <label class="check-item"><input type="checkbox" value="Education"> Education</label>
+      <label class="check-item"><input type="checkbox" value="Health"> Health</label>
+      <label class="check-item"><input type="checkbox" value="Fitness"> Fitness</label>
+      <label class="check-item"><input type="checkbox" value="Psychology"> Psychology</label>
+      <label class="check-item"><input type="checkbox" value="Personal Development"> Personal Development</label>
+      <label class="check-item"><input type="checkbox" value="Marketing"> Marketing</label>
+      <label class="check-item"><input type="checkbox" value="Finance"> Finance</label>
+      <label class="check-item"><input type="checkbox" value="Content Creation"> Content Creation</label>
+      <label class="check-item"><input type="checkbox" value="Design"> Design</label>
+      <label class="check-item"><input type="checkbox" value="Gaming"> Gaming</label>
+      <label class="check-item"><input type="checkbox" value="Travel"> Travel</label>
+      <label class="check-item"><input type="checkbox" value="Productivity"> Productivity</label>
+      <label class="check-item"><input type="checkbox" value="Leadership"> Leadership</label>
+      <label class="check-item"><input type="checkbox" value="E-commerce"> E-commerce</label>
+      <label class="check-item"><input type="checkbox" value="Real Estate"> Real Estate</label>
+      <label class="check-item"><input type="checkbox" value="Startups"> Startups</label>
+      <label class="check-item"><input type="checkbox" value="Other"> Other</label>
+    </div>
+  </div>
+
+  <div class="slide" data-id="9">
+    <div class="section-eyebrow">Section 3 — Interests &amp; passions</div>
+    <div class="q-title">What creators, books, or podcasts do you follow?</div>
+    <div class="q-sub">YouTube channels, influencers, books, or podcasts you return to regularly.</div>
+    <textarea id="a9" placeholder="I regularly follow..."></textarea>
+  </div>
+
+  <div class="slide" data-id="10">
+    <div class="section-eyebrow">Section 3 — Interests &amp; passions</div>
+    <div class="q-title">What kind of problems do you enjoy solving?</div>
+    <div class="q-sub">Think about the challenges that energise rather than drain you.</div>
+    <textarea id="a10" placeholder="I get energised when I'm solving problems like..."></textarea>
+  </div>
+
+  <div class="slide" data-id="11">
+    <div class="section-eyebrow">Section 4 — Entrepreneurial fit</div>
+    <div class="q-title">Which statement sounds most like you?</div>
+    <div class="q-sub">Choose the one that resonates most deeply.</div>
+    <div class="radio-grid" id="rg11">
+      <label class="radio-item"><input type="radio" name="r11" value="Creator — I love creating things"> <span>I love creating things</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Seller — I love selling things"> <span>I love selling things</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Educator — I love teaching people"> <span>I love teaching people</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Leader — I love managing teams"> <span>I love managing teams</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Analyst — I love analyzing data"> <span>I love analysing data</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Helper — I love helping people"> <span>I love helping people</span></label>
+      <label class="radio-item"><input type="radio" name="r11" value="Builder — I love building systems"> <span>I love building systems</span></label>
+    </div>
+  </div>
+
+  <div class="slide" data-id="12">
+    <div class="section-eyebrow">Section 4 — Entrepreneurial fit</div>
+    <div class="q-title">If you could build a business tomorrow, what would it be?</div>
+    <div class="q-sub">Dream freely — no constraints on money, skills, or time.</div>
+    <textarea id="a12" placeholder="My dream business would be..."></textarea>
+  </div>
+
+  <div class="slide" data-id="13">
+    <div class="section-eyebrow">Section 4 — Entrepreneurial fit</div>
+    <div class="q-title">Who would you most like to help?</div>
+    <div class="q-sub">Examples: students, parents, small businesses, startups, professionals, freelancers, creators.</div>
+    <textarea id="a13" placeholder="I want to help..."></textarea>
+  </div>
+
+  <div class="slide" data-id="14">
+    <div class="section-eyebrow">Section 5 — Future vision</div>
+    <div class="q-title">Where do you want to be in 5 years?</div>
+    <div class="q-sub">Describe your ideal lifestyle in as much detail as you can.</div>
+    <textarea id="a14" placeholder="In 5 years I see myself..."></textarea>
+  </div>
+
+  <div class="slide" data-id="15">
+    <div class="section-eyebrow">Section 5 — Future vision</div>
+    <div class="q-title">What would make you feel proud of yourself 10 years from now?</div>
+    <div class="q-sub">Think legacy, achievement, and impact — what would make you say "I did it"?</div>
+    <textarea id="a15" placeholder="Ten years from now I'd be proud if..."></textarea>
+  </div>
+
+  <div class="slide" data-id="16" id="result-slide">
+    <div class="result-screen">
+      <div class="result-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="result-title">Assessment complete!</div>
+      <div class="result-sub">You've answered all 16 questions. Click below to generate your full personalised report — it takes about 30 seconds.</div>
+      <button class="btn-start" id="analyze-btn" onclick="generateReport()" style="margin-bottom:16px">Generate my report →</button>
+      <button class="btn-review" id="review-btn" onclick="reviewAnswers()">← Review my answers</button>
+      <div class="error-box" id="error-box"></div>
+      <div id="report-output"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="nav-row" id="nav-row">
+  <button class="btn-back" id="btn-back" onclick="go(-1)">← Back</button>
+  <button class="btn-next locked" id="btn-next" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+const TOTAL = 16;
+const MIN_CHARS = 10;               // minimum characters for every written answer
+const MIN_CHARS_OVERRIDE = { 13: 4 }; // Q14 ("Who would you like to help?") can be short, e.g. "Students"
+const MAX_SKILLS = 5;               // Q7 limit
+let cur = 0;
+let going = 1;
+let started = false;
+
+const slides = document.querySelectorAll('.slide');
+const progFill = document.getElementById('prog');
+const progLabel = document.getElementById('prog-label');
+const curNum = document.getElementById('cur-num');
+const btnBack = document.getElementById('btn-back');
+const btnNext = document.getElementById('btn-next');
+const navRow = document.getElementById('nav-row');
+const progWrap = document.getElementById('prog-wrap');
+const stepCounter = document.getElementById('step-counter');
+
+/* ---------- VALIDATION ---------- */
+
+// Returns '' when question i is properly answered, otherwise an error message.
+function validateQuestion(i) {
+  const slide = slides[i];
+  if (!slide) return '';
+
+  const ta = slide.querySelector('textarea');
+  if (ta) {
+    const val = ta.value.trim();
+    const min = MIN_CHARS_OVERRIDE[i] || MIN_CHARS;
+    if (!val) return 'This question is required. Please write your answer to continue.';
+    if (val.length < min) return 'Please write a little more (at least ' + min + ' characters).';
+    if (!/[A-Za-z\u00C0-\u024F\u0600-\u06FF]/.test(val)) return 'Please enter a meaningful answer using words.';
+    return '';
+  }
+
+  const checks = slide.querySelectorAll('input[type="checkbox"]');
+  if (checks.length) {
+    const n = slide.querySelectorAll('input[type="checkbox"]:checked').length;
+    if (n === 0) return 'Please select at least one option to continue.';
+    if (slide.dataset.id === '6' && n > MAX_SKILLS) return 'Please select no more than ' + MAX_SKILLS + ' skills.';
+    return '';
+  }
+
+  const radios = slide.querySelectorAll('input[type="radio"]');
+  if (radios.length) {
+    if (!slide.querySelector('input[type="radio"]:checked')) return 'Please choose one statement to continue.';
+    return '';
+  }
+  return '';
+}
+
+function isAnswered(i) { return validateQuestion(i) === ''; }
+
+function answeredCount() {
+  let n = 0;
+  for (let i = 0; i < TOTAL; i++) if (isAnswered(i)) n++;
+  return n;
+}
+
+function firstIncomplete() {
+  for (let i = 0; i < TOTAL; i++) if (!isAnswered(i)) return i;
+  return -1;
+}
+
+/* ---------- ERROR UI ---------- */
+
+function prepareSlides() {
+  slides.forEach((s, i) => {
+    if (i >= TOTAL) return;
+    const q = s.querySelector('.q-title');
+    if (q && !q.querySelector('.req')) q.insertAdjacentHTML('beforeend', '<span class="req" title="Required">*</span>');
+
+    const meta = document.createElement('div');
+    meta.className = 'field-meta';
+    meta.innerHTML = '<div class="field-error" role="alert"></div><div class="field-count"></div>';
+    s.appendChild(meta);
+
+    const ta = s.querySelector('textarea');
+    if (ta) {
+      ta.setAttribute('required', 'required');
+      ta.addEventListener('input', () => { clearError(i); updateCount(i); refreshControls(); });
+      // Enter does not skip; Ctrl/Cmd+Enter submits only when valid
+      ta.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); go(1); }
+      });
+      updateCount(i);
+    }
+  });
+}
+
+function updateCount(i) {
+  const s = slides[i];
+  const ta = s.querySelector('textarea');
+  const el = s.querySelector('.field-count');
+  if (!ta || !el) return;
+  const min = MIN_CHARS_OVERRIDE[i] || MIN_CHARS;
+  const len = ta.value.trim().length;
+  el.textContent = len >= min ? '✓ ' + len + ' characters' : len + ' / ' + min + ' minimum';
+}
+
+function showError(i, msg) {
+  const s = slides[i];
+  const err = s.querySelector('.field-error');
+  if (err) { err.textContent = msg; err.classList.add('show'); }
+  const ta = s.querySelector('textarea');
+  if (ta) { ta.classList.add('invalid'); ta.focus(); }
+  const grp = s.querySelector('.check-grid, .radio-grid');
+  if (grp) grp.classList.add('invalid-group');
+  s.classList.remove('shake'); void s.offsetWidth; s.classList.add('shake');
+}
+
+function clearError(i) {
+  const s = slides[i];
+  const err = s.querySelector('.field-error');
+  if (err) { err.classList.remove('show'); err.textContent = ''; }
+  const ta = s.querySelector('textarea');
+  if (ta) ta.classList.remove('invalid');
+  const grp = s.querySelector('.check-grid, .radio-grid');
+  if (grp) grp.classList.remove('invalid-group');
+}
+
+// Updates progress bar and the look of the Next button based on real answers.
+function refreshControls() {
+  const n = answeredCount();
+  progFill.style.width = Math.round((n / TOTAL) * 100) + '%';
+  progLabel.textContent = n + ' of ' + TOTAL + ' answered';
+  if (cur < TOTAL) btnNext.classList.toggle('locked', !isAnswered(cur));
+}
+
+/* ---------- FLOW ---------- */
+
+function startAssessment() {
+  document.getElementById('hero-screen').style.display = 'none';
+  document.getElementById('qa-wrap').style.display = 'block';
+  navRow.style.display = 'flex';
+  progWrap.style.display = 'block';
+  stepCounter.style.display = 'block';
+  if (!started) { started = true; prepareSlides(); initInteractives(); }
+  updateUI();
+}
+
+function initInteractives() {
+  // Checkboxes: rely on the real "change" event (label clicks fire it exactly once)
+  document.querySelectorAll('.check-item').forEach(lbl => {
+    const cb = lbl.querySelector('input');
+    cb.addEventListener('change', () => {
+      const slide = lbl.closest('.slide');
+      const idx = parseInt(slide.dataset.id, 10);
+      if (slide.dataset.id === '6') {
+        const n = slide.querySelectorAll('input[type="checkbox"]:checked').length;
+        if (n > MAX_SKILLS) {
+          cb.checked = false; // enforce the 5-skill cap properly
+          showError(idx, 'You can select a maximum of ' + MAX_SKILLS + ' skills. Untick one to choose another.');
+          return;
+        }
+      }
+      lbl.classList.toggle('selected', cb.checked);
+      clearError(idx);
+      refreshControls();
+    });
+  });
+
+  document.querySelectorAll('.radio-item').forEach(lbl => {
+    const rb = lbl.querySelector('input');
+    rb.addEventListener('change', () => {
+      const grp = lbl.closest('.radio-grid');
+      grp.querySelectorAll('.radio-item').forEach(l => l.classList.toggle('selected', l.querySelector('input').checked));
+      clearError(parseInt(lbl.closest('.slide').dataset.id, 10));
+      refreshControls();
+    });
+  });
+}
+
+function updateUI() {
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'back');
+    if (i === cur) {
+      s.classList.add('active');
+      if (going < 0) s.classList.add('back');
+    }
+  });
+
+  curNum.textContent = cur < TOTAL ? cur + 1 : TOTAL;
+  btnBack.style.visibility = cur === 0 ? 'hidden' : 'visible';
+
+  if (cur >= TOTAL) {
+    navRow.style.display = 'none';
+  } else {
+    navRow.style.display = 'flex';
+    btnNext.textContent = cur === TOTAL - 1 ? 'Finish ✓' : 'Next →';
+  }
+
+  refreshControls();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function go(dir) {
+  if (dir > 0 && cur < TOTAL) {
+    // BLOCK moving forward unless the current question is answered
+    const msg = validateQuestion(cur);
+    if (msg) { showError(cur, msg); return; }
+    clearError(cur);
+    // Finishing: make sure every one of the 16 questions is complete
+    if (cur === TOTAL - 1) {
+      const bad = firstIncomplete();
+      if (bad !== -1) {
+        going = -1; cur = bad; updateUI();
+        showError(bad, 'Question ' + (bad + 1) + ' still needs an answer.');
+        return;
+      }
+    }
+  }
+  going = dir;
+  cur = Math.max(0, Math.min(TOTAL, cur + dir));
+  updateUI();
+}
+
+function reviewAnswers() {
+  going = -1;
+  cur = TOTAL - 1;
+  updateUI();
+}
+
+/* ---------- REPORT ---------- */
+
+function getAnswers() {
+  const ans = {};
+  document.querySelectorAll('textarea').forEach(ta => {
+    if (ta.value.trim()) ans[ta.id] = ta.value.trim();
+  });
+  ['cg3', 'cg6', 'cg8'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const vals = [...el.querySelectorAll('input:checked')].map(i => i.value);
+      if (vals.length) ans[id] = vals.join(', ');
+    }
+  });
+  const r11 = [...document.querySelectorAll('input[name="r11"]')].find(r => r.checked);
+  if (r11) ans.r11 = r11.value;
+  return ans;
+}
+
+async function generateReport() {
+  // Final gate: all 16 questions must be completely answered
+  const bad = firstIncomplete();
+  if (bad !== -1) {
+    going = -1; cur = bad; updateUI();
+    showError(bad, 'Question ' + (bad + 1) + ' still needs an answer before your report can be generated.');
+    return;
+  }
+
+  const a = getAnswers();
+  const btn = document.getElementById('analyze-btn');
+  const errorBox = document.getElementById('error-box');
+  const output = document.getElementById('report-output');
+
+  btn.disabled = true;
+  btn.textContent = 'Generating your report...';
+  errorBox.style.display = 'none';
+  output.innerHTML = '<div class="loading-indicator"><div class="spinner"></div>Analysing your answers with AI...</div>';
+
+  const prompt = `You are an expert entrepreneur coach and career strategist. Analyse the following assessment answers and produce a detailed, personalised OUTPUT REPORT.
+
+ASSESSMENT ANSWERS:
+Q1 – Why I want to be successful: ${a.a0}
+Q2 – Why entrepreneurship: ${a.a1}
+Q3 – Why now: ${a.a2}
+Q4 – What stopped me before: ${a.cg3}
+Q5 – Activities I lose time in: ${a.a4}
+Q6 – What people ask me for help with: ${a.a5}
+Q7 – Strongest skills: ${a.cg6}
+Q8 – If money wasn't a concern: ${a.a7}
+Q9 – Topics I enjoy: ${a.cg8}
+Q10 – Creators/books I follow: ${a.a9}
+Q11 – Problems I enjoy solving: ${a.a10}
+Q12 – I most love: ${a.r11}
+Q13 – My dream business: ${a.a12}
+Q14 – Who I want to help: ${a.a13}
+Q15 – Where I want to be in 5 years: ${a.a14}
+Q16 – What will make me proud in 10 years: ${a.a15}
+
+Generate the full OUTPUT REPORT with these sections. Be specific, personal, and deeply encouraging. Use the person's actual words and answers to make it feel tailored to them:
+
+## 🧠 Personality Summary
+Who this person is in 3-4 sentences, using their own language and answers.
+
+## 💪 Top 5 Strengths
+List and briefly explain their 5 strongest natural abilities based on answers.
+
+## 🚀 Entrepreneur Type
+Choose one: Visionary / Builder / Educator / Creator / Consultant / Operator / Analyst / Leader
+Explain in 2-3 sentences why this fits them specifically.
+
+## 🏢 Ideal Business Model
+Recommend one: Agency / Coaching / Freelancing / SaaS / E-commerce / Content Creator / Consulting / Community Building / Product Business
+Explain why it suits their personality, skills, and goals.
+
+## 🎯 Top 5 Niche Recommendations
+For each niche provide:
+- Niche Name
+- Why It Fits (2 sentences, personal to their answers)
+- Income Potential (e.g. $2,000–$10,000/month)
+- Difficulty Level (Beginner / Intermediate / Advanced)
+- First Step (one concrete action they can take this week)
+
+## 🌟 Personal Brand Positioning
+"I help ______ achieve ______ through ______."
+Provide 2 variations tailored to their best niche options.
+
+## 📊 Skill Gap Analysis
+Current strengths (3-4 bullet points)
+Missing skills (3-4 bullet points)
+Recommended learning path (3-4 specific resources or steps)
+
+## 📅 90-Day Action Plan
+Month 1 – Foundation (4-5 specific actions)
+Month 2 – Build (4-5 specific actions)
+Month 3 – Launch (4-5 specific actions)
+
+## 🏆 Success Scorecard
+Rate each out of 100 with a one-line explanation:
+- Confidence Score
+- Entrepreneurial Readiness
+- Skill Readiness
+- Niche Clarity
+- Personal Brand Readiness
+
+## ✅ Final Recommendation
+Answer in 4-5 sentences:
+Who am I? What should I focus on? What niche should I pursue? What should I do next?
+End with a powerful, personal, encouraging closing message.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API error ' + response.status);
+    const data = await response.json();
+    const text = data.content?.find(b => b.type === 'text')?.text || '';
+
+    output.innerHTML = '';
+    const sections = text.split(/\n## /).filter(Boolean);
+    sections.forEach((sec) => {
+      const lines = sec.replace(/^## /, '').split('\n');
+      const title = lines[0].replace(/^#+\s*/, '');
+      const body = lines.slice(1).join('\n').trim();
+      const div = document.createElement('div');
+      div.className = 'report-section';
+      div.innerHTML = `<div class="report-label">${escapeHtml(title)}</div><div class="report-content">${escapeHtml(body)}</div>`;
+      output.appendChild(div);
+    });
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.textContent = 'Copy full report';
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(text).then(() => { copyBtn.textContent = 'Copied!'; setTimeout(() => copyBtn.textContent = 'Copy full report', 2000); });
+    };
+    output.appendChild(copyBtn);
+    btn.style.display = 'none';
+    document.getElementById('review-btn').style.display = 'none';
+
+  } catch (err) {
+    output.innerHTML = '';
+    errorBox.style.display = 'block';
+    errorBox.textContent = 'Something went wrong generating your report. Please try again in a moment.';
+    btn.disabled = false;
+    btn.textContent = 'Try again →';
+  }
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>');
+}
+</script>
+</body>
+</html>
