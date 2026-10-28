@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python Level 1 + HTML/CSS Basics Test (Days 1–16)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#f2f5f4;--card:#fff;--ink:#14231f;--mut:#5c6f69;--line:#dbe3e0;--acc:#0b7a6e;--ok:#1a8a4a;--bad:#c8402f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a18;--card:#172522;--ink:#e6f0ed;--mut:#93a8a2;--line:#27403b;--acc:#4fd1bd;--ok:#4cc985;--bad:#ff8571}}
+:root[data-theme="dark"]{--bg:#0f1a18;--card:#172522;--ink:#e6f0ed;--mut:#93a8a2;--line:#27403b;--acc:#4fd1bd;--ok:#4cc985;--bad:#ff8571}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+[hidden]{display:none!important}
+.wrap{max-width:740px;margin:0 auto;padding:0 14px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 0;font-size:.9rem}
+header .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;flex:0 0 100%;margin-top:4px}
+.bar i{display:block;height:100%;width:0;background:var(--acc)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+h1{font-size:1.35rem;line-height:1.25;margin:.2em 0}h2{font-size:1.1rem;margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+small,.mut{color:var(--mut);font-weight:400}
+.q{padding:12px 0;border-top:1px solid var(--line)}.q p{margin:0 0 6px;font-weight:700}
+.opt{display:flex;gap:10px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;margin:6px 0;cursor:pointer}
+.opt:has(input:checked){border-color:var(--acc);background:color-mix(in srgb,var(--acc) 13%,transparent)}
+.opt input{margin-top:6px;accent-color:var(--acc)}
+input[type=text],input[type=email],textarea{width:100%;font:inherit;color:inherit;background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px}
+textarea.code{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:.95rem}
+.miss{outline:2px solid var(--bad);outline-offset:4px;border-radius:8px}
+button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:12px 20px;background:var(--acc);color:var(--card);cursor:pointer}
+button.alt{background:none;color:var(--acc);border:1px solid var(--acc)}
+#msg{color:var(--bad);font-weight:700}
+.top{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center}
+.ring b{width:116px;height:116px;border-radius:50%;background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:2.4rem;line-height:1}
+.ring small{font-size:.75rem;margin-top:4px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.badge{padding:3px 12px;border-radius:99px;color:var(--card);font-weight:700;font-size:.9rem}.badge.ok{background:var(--ok)}.badge.bad{background:var(--bad)}
+.row{display:flex;justify-content:space-between;margin-top:10px}
+details{margin-top:10px}summary{cursor:pointer;font-weight:700}
+.it{padding:8px 0;border-top:1px solid var(--line);font-size:.95rem}.it em{display:block;color:var(--mut);font-style:normal;white-space:pre-wrap;overflow-wrap:anywhere}
+@media print{:root{--bg:#fff!important;--card:#fff!important;--ink:#111!important;--mut:#555!important;--line:#ccc!important}.np{display:none!important}}
+</style></head>
+<body>
+<header class="np" id="hd"><div class="wrap"><b>Python + HTML/CSS Test</b><span id="pc"></span><div class="bar"><i id="pb"></i></div></div></header>
+<main class="wrap"><form id="f" novalidate></form><div id="rep" hidden></div></main>
+<script>
+const PASS=30,$=s=>document.querySelector(s),f=$('#f');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+const shuf=a=>{a=[...a];for(let i=a.length;--i;){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+// [question, correct answer, wrong, wrong, wrong] – options are shuffled for every student
+const MCQ=[
+// Python – Days 1 to 16
+["Day 1: Which command runs a Python script named main.py from the terminal?","python main.py","run main.py","start python main","execute main.py"],
+["Day 2: Which is a correct snake_case variable name?","student_name","StudentName","student-name","1student name"],
+["Day 2: If name = \"Ali\", which line prints Hello, Ali using an f-string?","print(f\"Hello, {name}\")","print(\"Hello, {name}\")","print(f\"Hello, name\")","print(f(Hello, name))"],
+["Day 3: Which operator checks if two values are equal?","==","=","!=","=>"],
+["Day 3: What is the result of True and False?","False","True","None","Error"],
+["Day 3: Which keyword checks another condition after an if?","elif","else if","elseif","otherwise"],
+["Day 4: Which statement stops a loop immediately?","break","continue","stop","exit_loop"],
+["Day 5: What numbers does range(1, 6) produce?","1, 2, 3, 4, 5","1, 2, 3, 4, 5, 6","0, 1, 2, 3, 4, 5","0, 1, 2, 3, 4"],
+["Day 6: Which keyword is used to define a function?","def","function","func","define"],
+["Day 6: What does return do in a function?","Sends a value back to the caller","Prints text on the screen only","Deletes the function","Starts a loop"],
+["Day 7: Which list method adds an item at the end of the list?","append()","insert()","pop()","sort()"],
+["Day 8: scores = {\"math\": 90}. How do you get the value 90?","scores[\"math\"]","scores[math]","scores.math","scores(0)"],
+["Day 9: Which collection removes duplicate values automatically?","set","tuple","list","string"],
+["Day 10: Which error happens when you run 10 / 0?","ZeroDivisionError","ValueError","TypeError","FileNotFoundError"],
+["Day 11: What is the safe way to open a file so it closes automatically?","with open(\"journal.txt\", \"a\") as f:","open(\"journal.txt\") and never close it","f = journal.txt.open","file.open(journal.txt)"],
+["Day 12: A CLI note app should load notes when it starts and do what when it exits?","Save the notes to a file","Delete all notes","Ignore the notes","Print the notes twice"],
+["Day 13: In OOP, what is a class?","A blueprint for creating objects","A type of loop","A file mode","A kind of error"],
+["Day 14: What is the difference between instance and class attributes?","Instance attributes belong to one object; class attributes are shared by all objects","They are exactly the same","Class attributes can only be numbers","Instance attributes can only be strings"],
+["Day 15: Which function lets a subclass call its parent's __init__?","super()","parent()","base()","inherit()"],
+["Day 16: Which Git command stages files for the next commit?","git add","git commit","git push","git init"],
+// HTML and CSS basics
+["HTML: Which tag creates the largest heading?","<h1>","<h6>","<head>","<p>"],
+["HTML: Which tag creates a link?","<a href=\"...\">","<link>","<img src=\"...\">","<url>"],
+["HTML: Which tag shows a picture?","<img src=\"...\">","<picture.src>","<photo>","<a>"],
+["CSS: Which property changes the text colour?","color","text-style","font-paint","background-color"],
+["CSS: Which selector targets elements with class=\"box\"?",".box","#box","box","*box"]];
+const TF=[
+["A for loop can go through every item in a list.",1],
+["A tuple can be changed after it is created.",0],
+["git push sends your commits to the remote repository on GitHub.",1],
+["The <h1> tag is normally used for the main heading of a page.",1],
+["In CSS, color: red; changes the background colour of an element.",0]];
+// [question, keyword patterns, how many must match, model answer, minimum words]
+const SH=[
+["What is the difference between a list and a dictionary?",["index|ordered|position|sequence|order","key|pair|value","name|label"],2,"A list stores ordered items accessed by index; a dictionary stores key-value pairs accessed by key.",4],
+["Why do we use try and except in Python?",["error|exception|crash|problem|bug","handle|catch|prevent|avoid|recover|graceful|stop|safe"],2,"To handle errors so the program does not crash and can recover from bad input.",4],
+["What are a class and an object in OOP? Explain briefly.",["blueprint|template|design|plan|model","instance|copy|real|created|made from|example|built"],2,"A class is a blueprint; an object is an instance created from that blueprint.",4],
+["Write the HTML tags used to make an unordered list and one list item.",["\\bul\\b","\\bli\\b"],2,"<ul> ... </ul> for the list and <li> ... </li> for each item.",2],
+["What is CSS used for? Give one CSS property as an example.",["style|design|look|appearance|layout|format|beautif|decorat","color|background|font|margin|padding|border|width|size|text-align"],2,"CSS styles and designs how a web page looks, for example color or font-size.",4]];
+// [heading, note, [question, minimum words, regex, model answer]]
+const PR=[
+["Practical 1 – Python Code (Days 1–6)","Type the Python code. Spacing and quote style can vary.",[
+["Write one line that asks the user for input and stores it in a variable called name.",2,/name\s*=\s*input\s*\(/i,"name = input(\"Enter your name: \")"],
+["Write an if statement that prints Adult when the variable age is 18 or more.",3,/if\s+age\s*>=\s*18[\s\S]*print/i,"if age >= 18:\n    print(\"Adult\")"],
+["Write a for loop that prints the numbers 1 to 5.",3,/for\s+\w+\s+in\s+(range\s*\(\s*1\s*,\s*6\s*\)|\[)[\s\S]*print/i,"for i in range(1, 6):\n    print(i)"],
+["Write a function called greet that takes name and returns Hello, plus the name.",3,/def\s+greet\s*\(\s*name[^)]*\)[\s\S]*return/i,"def greet(name):\n    return \"Hello, \" + name"],
+["Write a list called fruits with three fruits, then add mango to it.",5,/fruits\s*=\s*\[[\s\S]*\][\s\S]*append\s*\(/i,"fruits = [\"apple\", \"banana\", \"orange\"]\nfruits.append(\"mango\")"]]],
+["Practical 2 – Data, Files, OOP & Git (Days 7–16)","Type the Python or Git code.",[
+["Write a dictionary called student with the keys name and score.",4,/student\s*=\s*\{[\s\S]*name[\s\S]*score[\s\S]*\}/i,"student = {\"name\": \"Ali\", \"score\": 85}"],
+["Write a try/except block that catches ZeroDivisionError when running 10 / 0.",4,/try\s*:[\s\S]*except\s+ZeroDivisionError/i,"try:\n    print(10 / 0)\nexcept ZeroDivisionError:\n    print(\"Cannot divide by zero\")"],
+["Write the line that opens journal.txt for appending using a context manager.",4,/with\s+open\s*\(\s*["']journal\.txt["']\s*,\s*["']a["']\s*\)\s+as\s+\w+\s*:/i,"with open(\"journal.txt\", \"a\") as f:"],
+["Write the first lines of a class called Car with an __init__ method that takes brand.",5,/class\s+Car[\s\S]*def\s+__init__\s*\(\s*self\s*,\s*brand/i,"class Car:\n    def __init__(self, brand):\n        self.brand = brand"],
+["Write the three Git commands, in order, to stage all files, commit with a message, and push.",6,/git\s+add[\s\S]*git\s+commit[\s\S]*git\s+push/i,"git add .\ngit commit -m \"My message\"\ngit push"]]],
+["Practical 3 – HTML & CSS Basics","Type the HTML or CSS code.",[
+["Write an h1 heading with the text My First Page.",1,/<h1[^>]*>[^<]+<\/h1>/i,"<h1>My First Page</h1>"],
+["Write a paragraph tag with any sentence inside it.",1,/<p[^>]*>[^<]+<\/p>/i,"<p>I am learning HTML.</p>"],
+["Write a link to https://github.com with the text Visit GitHub.",2,/<a\s+href\s*=\s*["']https:\/\/github\.com\/?["'][^>]*>[^<]+<\/a>/i,"<a href=\"https://github.com\">Visit GitHub</a>"],
+["Write an unordered list with two items.",2,/<ul[^>]*>[\s\S]*<li[^>]*>[^<]+<\/li>[\s\S]*<li[^>]*>[^<]+<\/li>[\s\S]*<\/ul>/i,"<ul>\n  <li>Python</li>\n  <li>HTML</li>\n</ul>"],
+["Write CSS that makes every h1 blue and centered.",4,/h1\s*\{[\s\S]*(color\s*:\s*blue[\s\S]*text-align\s*:\s*center|text-align\s*:\s*center[\s\S]*color\s*:\s*blue)/i,"h1 {\n  color: blue;\n  text-align: center;\n}"]]]];
+const TOT=MCQ.length+TF.length+SH.length+PR.length*5;
+let qn=[];
+const radio=(n,o)=>`<label class="opt"><input type="radio" name="${n}" value="${esc(o)}"><span>${esc(o)}</span></label>`;
+const Q=(n,t,b)=>(qn.push(n),`<div class="q"><p>${esc(t)}</p>${b}</div>`);
+const S=(t,m,b,note)=>`<section class="card"><h2>${t}<small>${m} marks</small></h2>${note?`<p class="mut">${esc(note)}</p>`:''}${b}</section>`;
+function build(){qn=[];
+ let h=`<section class="card"><h1>Python Level 1 + HTML/CSS Basics Test</h1><p class="mut">30-Day Python + VS Code + GitHub Builder Challenge – Days 1 to 16 and basic HTML &amp; CSS.<br>Total marks: ${TOT}. Passing marks: ${PASS}.</p><b>Instructions</b><ol><li>Read every question carefully.</li><li>Select one correct answer for each MCQ and True/False question.</li><li>Answer short questions in your own words.</li><li>In practical tasks, type the code yourself. Each part carries 1 mark.</li><li>Submit your test after completing all questions.</li></ol><div class="q"><p>Full name</p><input type="text" name="nm" autocomplete="name"></div><div class="q"><p>Email <small>(optional)</small></p><input type="email" name="em" autocomplete="email"></div></section>`;
+ h+=S('Section A – Multiple Choice',MCQ.length,MCQ.map((m,i)=>Q('m'+i,`${i+1}. ${m[0]}`,shuf(m.slice(1)).map(o=>radio('m'+i,o)).join(''))).join(''));
+ h+=S('Section B – True / False',TF.length,TF.map((t,i)=>Q('t'+i,`${MCQ.length+i+1}. ${t[0]}`,radio('t'+i,'True')+radio('t'+i,'False'))).join(''));
+ h+=S('Section C – Short Questions',SH.length,SH.map((s,i)=>Q('s'+i,`${MCQ.length+TF.length+i+1}. ${s[0]}`,`<textarea name="s${i}" rows="3"></textarea>`)).join(''),'Each question carries 1 mark.');
+ PR.forEach((p,k)=>h+=S(p[0],5,p[2].map((x,i)=>{const n=`p${k}_${i}`;return Q(n,`${i+1}. ${x[0]}`,`<textarea class="code" name="${n}" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>`)}).join(''),p[1]));
+ f.innerHTML=h+'<p id="msg" role="alert"></p><button>Submit and get my report</button>';upd()}
+function upd(){const d=qn.filter(n=>f.elements[n].value.trim()).length;$('#pc').textContent=d+' of '+qn.length+' answered';$('#pb').style.width=d*100/qn.length+'%'}
+f.oninput=f.onchange=e=>{e.target.closest('.q')?.classList.remove('miss');upd()};
+f.onsubmit=e=>{e.preventDefault();
+ document.querySelectorAll('.miss').forEach(x=>x.classList.remove('miss'));
+ const el=n=>f.querySelector(`[name="${n}"]`).closest('.q'),miss=['nm',...qn].filter(n=>!f.elements[n].value.trim());
+ if(miss.length){miss.forEach(n=>el(n).classList.add('miss'));el(miss[0]).scrollIntoView({behavior:'smooth',block:'center'});$('#msg').textContent='Please answer every question. '+miss.length+' left.';return}
+ report()};
+function report(){
+ const v=n=>f.elements[n].value.trim(),W=s=>s.split(/\s+/).filter(Boolean).length;
+ const secs=[
+ {t:'A: Multiple Choice',it:MCQ.map((m,k)=>{const a=v('m'+k),ok=a==m[1];return{q:m[0],ok,n:ok?'':`Your answer: ${esc(a)}<br>Correct: ${esc(m[1])}`}})},
+ {t:'B: True / False',it:TF.map((t,k)=>{const a=v('t'+k),r=t[1]?'True':'False',ok=a==r;return{q:t[0],ok,n:ok?'':`Your answer: ${a}<br>Correct: ${r}`}})},
+ {t:'C: Short Questions',it:SH.map((s,k)=>{const a=v('s'+k),h=s[1].filter(p=>new RegExp(p,'i').test(a)).length;return{q:s[0],ok:W(a)>=s[4]&&h>=s[2],n:`Your answer: ${esc(a)}<br>Model answer: ${esc(s[3])}`}})},
+ ...PR.map((p,k)=>({t:'D: '+p[0].replace(/^Practical[^–]*–\s*/,''),it:p[2].map((x,j)=>{const a=v(`p${k}_${j}`),ok=W(a)>=x[1]&&x[2].test(a);return{q:x[0],ok,n:`Your answer:\n${esc(a)}`+(ok?'':`\n\nModel answer:\n${esc(x[3])}`)}})}))];
+ const got=s=>s.it.filter(x=>x.ok).length,tot=secs.reduce((a,s)=>a+got(s),0),pct=Math.round(tot*100/TOT),pass=tot>=PASS,em=v('em');
+ $('#rep').innerHTML=`<div class="card top"><div class="ring" style="--p:${pct};--c:var(--${pass?'ok':'bad'})"><b>${tot}<small>out of ${TOT}</small></b></div><div><h1>${esc(v('nm'))}</h1><div class="mut">${esc(em)}</div><div class="mut">${new Date().toLocaleString()}</div><p><span class="badge ${pass?'ok':'bad'}">${pass?'Passed':'Not passed yet'}</span> ${pct}%. Passing marks: ${PASS}.</p><p>${pass?(pct>=80?'Excellent work!':'Good job, you passed.'):'Review the sections below and try again.'}</p></div></div>
+<div class="card"><h2>Marks by section</h2>${secs.map(s=>`<div class="row"><span>${s.t}</span><b>${got(s)} / ${s.it.length}</b></div><div class="bar"><i style="width:${got(s)*100/s.it.length}%"></i></div>`).join('')}</div>
+<div class="card"><h2>Answer review</h2>${secs.map(s=>`<details><summary>${s.t} (${got(s)}/${s.it.length})</summary>${s.it.map(x=>`<div class="it"><b class="${x.ok?'ok':'bad'}">${x.ok?'✓':'✗'}</b> ${esc(x.q)}${x.n?`<em>${x.n}</em>`:''}</div>`).join('')}</details>`).join('')}</div>
+<p class="mut">Short and practical answers are auto-checked for keywords and code patterns. A correct answer written in an unusual way may be marked wrong, so your teacher may review them too.</p>
+<p class="np"><button onclick="print()">Print or save as PDF</button> <button class="alt" onclick="again()">Retake test</button></p>`;
+ f.hidden=$('#hd').hidden=true;$('#rep').hidden=false;scrollTo(0,0)}
+function again(){$('#rep').hidden=true;f.hidden=$('#hd').hidden=false;build();scrollTo(0,0)}
+addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
+build();
+</script>
+</body></html>
